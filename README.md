@@ -26,7 +26,7 @@ and on Tom's computer, the following code receives the string:
 		Console.WriteLine("I got a message from " + srcname + ": " + msg.ToString());
 	}
 
-It should prints
+It should print
 
     I got a message from David: Hello!
 	
@@ -38,9 +38,7 @@ The message transmission should be successful as long as David's computer and To
 
 1. Copy Icasye.dll and Icasye.xml to the directory of your .NET project, and add a reference to Icasye.dll in your project.
 
-2. Include the namespace Icasye in your code
-
-    using Icasye;
+2. Include using the namespace 'Icasye' in your code.
 
 A sample C# program named sample_Icasye showing how to use Icasye is provided.
 
