@@ -36,11 +36,15 @@ The message transmission should be successful as long as David's computer and To
 
 #### How to use in your project
 
-1. Copy Icasye.dll and Icasye.xml to the directory of your .NET project, and add a reference to Icasye.dll in your project.
+1. Copy Icasye.dll and Icasye.xml to the directory of your .NET project.
 
-2. Include using the namespace 'Icasye' in your code.
+2. Add a reference to Icasye.dll in your project.
 
-A sample C# program named sample_Icasye showing how to use Icasye is provided.
+3. Include using the namespace 'Icasye' in your code.
+
+4. Create one and only one object of IcasyeClient class, and then start to setup and use it to manage communications.
+
+A sample C# program named sample_Icasye showing how to use the IcasyeClient class is provided.
 
 #### Side projects
 	
