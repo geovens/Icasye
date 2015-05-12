@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TCP-CSharp-Test", "TCP-CSha
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UDP-CSharp-Test", "UDP-CSharp-Test\UDP-CSharp-Test.csproj", "{F7571218-53F0-4E55-A84C-03DE2B52B340}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sample_Icasye", "sample_Icasye\sample_Icasye.csproj", "{152D85E7-03DA-4A75-938E-52825085B960}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -71,6 +73,14 @@ Global
 		{F7571218-53F0-4E55-A84C-03DE2B52B340}.Release|x64.Build.0 = Release|x64
 		{F7571218-53F0-4E55-A84C-03DE2B52B340}.Release|x86.ActiveCfg = Release|x86
 		{F7571218-53F0-4E55-A84C-03DE2B52B340}.Release|x86.Build.0 = Release|x86
+		{152D85E7-03DA-4A75-938E-52825085B960}.Debug|x64.ActiveCfg = Debug|x64
+		{152D85E7-03DA-4A75-938E-52825085B960}.Debug|x64.Build.0 = Debug|x64
+		{152D85E7-03DA-4A75-938E-52825085B960}.Debug|x86.ActiveCfg = Debug|x86
+		{152D85E7-03DA-4A75-938E-52825085B960}.Debug|x86.Build.0 = Debug|x86
+		{152D85E7-03DA-4A75-938E-52825085B960}.Release|x64.ActiveCfg = Release|x64
+		{152D85E7-03DA-4A75-938E-52825085B960}.Release|x64.Build.0 = Release|x64
+		{152D85E7-03DA-4A75-938E-52825085B960}.Release|x86.ActiveCfg = Release|x86
+		{152D85E7-03DA-4A75-938E-52825085B960}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

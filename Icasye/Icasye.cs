@@ -24,11 +24,11 @@ namespace Icasye
 		/// </summary>
 		public event MessageGotEvent OnMessageGot;
 		/// <summary>
-		/// a setting of whether to broadcast information of myself to all other clients in the lacal network to let them know my existence
+		/// setting of whether to broadcast information of myself to all other clients in the lacal network to let them know my existence
 		/// </summary>
 		public bool ToSendCard = true;
 		/// <summary>
-		/// a setting of whether to receive broadcasted information from other clients to know there existence
+		/// setting of whether to receive broadcasted information from other clients to know there existence
 		/// </summary>
 		public bool ToReceiveCard = true;
 
@@ -38,7 +38,7 @@ namespace Icasye
 		}
 
 		/// <summary>
-		/// call this function to enable output of log info of Icasye, TCP-CSharp, UDP-CSharp
+		/// call this function to enable output of log info of Icasye, TCP-CSharp and UDP-CSharp
 		/// </summary>
 		public void SetToPrintLog()
 		{
@@ -46,7 +46,7 @@ namespace Icasye
 			Mnge.SetToPrintLog();
 		}
 		/// <summary>
-		/// set the name of self Icasye client. be careful not to conflict with other clients
+		/// set the name of this Icasye client. be careful not to conflict with other clients
 		/// </summary>
 		/// <param name="name">my name</param>
 		/// <returns></returns>
@@ -55,7 +55,7 @@ namespace Icasye
 			return Mnge.SetMyName(name);
 		}
 		/// <summary>
-		/// get online into Icasye network
+		/// get online
 		/// </summary>
 		/// <returns></returns>
 		public bool GoOnline()
@@ -63,7 +63,7 @@ namespace Icasye
 			return Mnge.GoOnline();
 		}
 		/// <summary>
-		/// get offline from Icasye network
+		/// get offline
 		/// </summary>
 		/// <returns></returns>
 		public bool GoOffline()
@@ -81,7 +81,7 @@ namespace Icasye
 			return Mnge.Send(name, msg);
 		}
 		/// <summary>
-		/// get names of all current online clients
+		/// get names of all currently online clients
 		/// </summary>
 		/// <returns></returns>
 		public List<string> GetClientList()
@@ -130,7 +130,7 @@ namespace Icasye
 		/// <summary>
 		/// connect to a remote Icasye client that is not in the same local network
 		/// </summary>
-		/// <param name="address">address of the client. will use the default port 5301</param>
+		/// <param name="address">IP address of the client. the default port 5301 will be used</param>
 		/// <returns></returns>
 		public bool AddIcasyeClientManually(string address)
 		{
@@ -159,8 +159,6 @@ namespace Icasye
 		/// <summary>
 		/// delete a manually added client or connection.
 		/// you are not able by now to delete/disconnect a client which is not manually added by you.
-		/// if you need, try to use BlockClient to hide some client from you, 
-		/// when it does not matter that the TCP connection to the bloced one remains live
 		/// </summary>
 		/// <param name="name">name of the manually added client to delete</param>
 		/// <returns></returns>
@@ -171,8 +169,8 @@ namespace Icasye
 		}
 
 		/// <summary>
-		/// NOTE: this is an unaccomplished, unreliable and buggy function.
 		/// get local ip address towards the spacific client. works only on clients which are in the same local network
+		/// 	NOTE: this is an unaccomplished, unreliable and buggy function.
 		/// </summary>
 		/// <param name="name">name of the client </param>
 		/// <returns></returns>
