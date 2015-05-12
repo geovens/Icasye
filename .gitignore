@@ -1,0 +1,10 @@
+build
+
+*.pdb
+*.exp
+*.sdf
+*.suo
+*.opensdf
+*.config
+*.lnk
+*vshost.exe*

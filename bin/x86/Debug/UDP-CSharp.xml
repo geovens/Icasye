@@ -1,0 +1,142 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>UDP-CSharp</name>
+    </assembly>
+    <members>
+        <member name="T:UDP_CSharp.UDPMessage">
+            <summary>
+            one object of this class presents one stream of UDP data
+            </summary>
+        </member>
+        <member name="F:UDP_CSharp.UDPMessage.Length">
+            <summary>
+            the stream data length in bytes
+            </summary>
+        </member>
+        <member name="F:UDP_CSharp.UDPMessage.Data">
+            <summary>
+            the stream data
+            </summary>
+        </member>
+        <member name="M:UDP_CSharp.UDPMessage.SetString(System.String)">
+            <summary>
+            fill Data with a string encoded using UTF8
+            </summary>
+            <param name="str"></param>
+        </member>
+        <member name="M:UDP_CSharp.UDPMessage.AppendString(System.String)">
+            <summary>
+            append Data with a string encoded using UTF8
+            </summary>
+            <param name="str"></param>
+        </member>
+        <member name="M:UDP_CSharp.UDPMessage.GetString">
+            <summary>
+            decode Data using UTF8 to get the string. please only use this when you know the Data are all text and are in UTF8 encoding
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:UDP_CSharp.UDPCSharp">
+            <summary>
+            the main class to manage all UDP affairs
+            </summary>
+        </member>
+        <member name="F:UDP_CSharp.UDPCSharp.ToPrintLog">
+            <summary>
+            whether to print log
+            </summary>
+        </member>
+        <member name="F:UDP_CSharp.UDPCSharp.ToPrintError">
+            <summary>
+            whether to print error info
+            </summary>
+        </member>
+        <member name="M:UDP_CSharp.UDPCSharp.AddDestination(System.String,System.String,System.Int32)">
+            <summary>
+            add a remote host as a named destination
+            </summary>
+            <param name="name">user defined name of the destination</param>
+            <param name="address">address</param>
+            <param name="port">port</param>
+            <returns></returns>
+        </member>
+        <member name="M:UDP_CSharp.UDPCSharp.AddBroadcastDestination(System.String,System.String,System.Int32,System.Int32)">
+            <summary>
+            add a named broadcast destination
+            </summary>
+            <param name="name">user defined name of the destination</param>
+            <param name="ip">ip</param>
+            <param name="bitlength">bit-length of the network prefix</param>
+            <param name="port">port</param>
+            <returns></returns>
+        </member>
+        <member name="M:UDP_CSharp.UDPCSharp.AddBroadcastDestination(System.String,System.String,System.String,System.Int32)">
+            <summary>
+            add a named broadcast destination
+            </summary>
+            <param name="name">user defined name of the destination</param>
+            <param name="ip">ip</param>
+            <param name="mask">subnet mask</param>
+            <param name="port">port</param>
+            <returns></returns>
+        </member>
+        <member name="M:UDP_CSharp.UDPCSharp.AddListen(System.String,System.Int32)">
+            <summary>
+            add a listener on a specified local port
+            </summary>
+            <param name="name">user defined name of the listener</param>
+            <param name="port">port to listen</param>
+            <returns>0=success</returns>
+        </member>
+        <member name="M:UDP_CSharp.UDPCSharp.StopListen(System.String)">
+            <summary>
+            stop a listener
+            </summary>
+            <param name="name">name of the listener to stop</param>
+            <returns></returns>
+        </member>
+        <member name="M:UDP_CSharp.UDPCSharp.StopListen(System.Int32)">
+            <summary>
+            stop a listener
+            </summary>
+            <param name="port">port to stop listening on</param>
+            <returns></returns>
+        </member>
+        <member name="M:UDP_CSharp.UDPCSharp.RenameListener(System.String,System.String)">
+            <summary>
+            raname a listener
+            </summary>
+            <param name="oldname">old name</param>
+            <param name="newname">new user defined name</param>
+            <returns></returns>
+        </member>
+        <member name="M:UDP_CSharp.UDPCSharp.GetListenerList">
+            <summary>
+            get a list of names of current listeners
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:UDP_CSharp.UDPCSharp.Send(System.String,UDP_CSharp.UDPMessage)">
+            <summary>
+            send UDP data to a remote host
+            </summary>
+            <param name="destname">name of the connection to send data to</param>
+            <param name="message">data to send, in form of class UDPMessage</param>
+            <returns></returns>
+        </member>
+        <member name="M:UDP_CSharp.UDPCSharp.SetSpeMessageGotEvent(System.String,UDP_CSharp.MessageGotEvent)">
+            <summary>
+            register a new event of message got for a specified listener 
+            </summary>
+            <param name="name">name of the connection to set</param>
+            <param name="mge">the function to handle the event</param>
+            <returns></returns>
+        </member>
+        <member name="E:UDP_CSharp.UDPCSharp.OnMessageGot">
+            <summary>
+            an event  triggered when UDP data is received by any current connection
+            </summary>
+        </member>
+    </members>
+</doc>

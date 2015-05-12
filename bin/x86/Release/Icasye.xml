@@ -1,0 +1,199 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Icasye</name>
+    </assembly>
+    <members>
+        <member name="T:Icasye.IcasyeClient">
+            <summary>
+            Icasye client manager
+            </summary>
+        </member>
+        <member name="F:Icasye.IcasyeClient.ToSendCard">
+            <summary>
+            a setting of whether to broadcast information of myself to all other clients in the lacal network to let them know my existence
+            </summary>
+        </member>
+        <member name="F:Icasye.IcasyeClient.ToReceiveCard">
+            <summary>
+            a setting of whether to receive broadcasted information from other clients to know there existence
+            </summary>
+        </member>
+        <member name="M:Icasye.IcasyeClient.SetToPrintLog">
+            <summary>
+            call this function to enable output of log info of Icasye, TCP-CSharp, UDP-CSharp
+            </summary>
+        </member>
+        <member name="M:Icasye.IcasyeClient.SetMyName(System.String)">
+            <summary>
+            set the name of self Icasye client. be careful not to conflict with other clients
+            </summary>
+            <param name="name">my name</param>
+            <returns></returns>
+        </member>
+        <member name="M:Icasye.IcasyeClient.GoOnline">
+            <summary>
+            get online into Icasye network
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Icasye.IcasyeClient.GoOffline">
+            <summary>
+            get offline from Icasye network
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Icasye.IcasyeClient.Send(System.String,Icasye.IcasyeMsg)">
+            <summary>
+            send TCP data to another client
+            </summary>
+            <param name="name">destination client name</param>
+            <param name="msg">the TCP data to send</param>
+            <returns></returns>
+        </member>
+        <member name="M:Icasye.IcasyeClient.GetClientList">
+            <summary>
+            get names of all current online clients
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Icasye.IcasyeClient.CheckClientOnline(System.String)">
+            <summary>
+            check if a client with the specific name is online
+            </summary>
+            <param name="name">name of client to check</param>
+            <returns></returns>
+        </member>
+        <member name="M:Icasye.IcasyeClient.GetClientAddress(System.String)">
+            <summary>
+            get the ip address of a client
+            </summary>
+            <param name="name">name of client to get address of</param>
+            <returns></returns>
+        </member>
+        <member name="M:Icasye.IcasyeClient.SetSpecificMessageGotEvent(System.String,Icasye.MessageGotEvent)">
+            <summary>
+            add an event which will be triggered when getting TCP data from a specific client 
+            </summary>
+            <param name="name">name of the specific client</param>
+            <param name="mge">the function to handle the event</param>
+            <returns></returns>
+        </member>
+        <member name="M:Icasye.IcasyeClient.AddGeneralConnectionManually(System.String,System.String,System.Int32)">
+            <summary>
+            add a TCP connection to a host that is not an Icasye client
+            </summary>
+            <param name="name">user defined name of the connection</param>
+            <param name="address">address if the host</param>
+            <param name="port">port to connect</param>
+            <returns></returns>
+        </member>
+        <member name="M:Icasye.IcasyeClient.AddIcasyeClientManually(System.String)">
+            <summary>
+            connect to a remote Icasye client that is not in the same local network
+            </summary>
+            <param name="address">address of the client. will use the default port 5301</param>
+            <returns></returns>
+        </member>
+        <member name="M:Icasye.IcasyeClient.Block(System.String)">
+            <summary>
+            block a Icasye client with the specific name. this will only hide it from you, not affecting any TCP behavior in backgruond
+            </summary>
+            <param name="name">name of the client to block</param>
+            <returns></returns>
+        </member>
+        <member name="M:Icasye.IcasyeClient.UnBlock(System.String)">
+            <summary>
+            unblock an Icasye client
+            </summary>
+            <param name="name">name of the client to unblock</param>
+            <returns></returns>
+        </member>
+        <member name="M:Icasye.IcasyeClient.DeleteManuallyAdded(System.String)">
+            <summary>
+            delete a manually added client or connection.
+            you are not able by now to delete/disconnect a client which is not manually added by you.
+            if you need, try to use BlockClient to hide some client from you, 
+            when it does not matter that the TCP connection to the bloced one remains live
+            </summary>
+            <param name="name">name of the manually added client to delete</param>
+            <returns></returns>
+        </member>
+        <member name="M:Icasye.IcasyeClient.GetMyAddressFacingClient(System.String)">
+            <summary>
+            NOTE: this is an unaccomplished, unreliable and buggy function.
+            get local ip address towards the spacific client. works only on clients which are in the same local network
+            </summary>
+            <param name="name">name of the client </param>
+            <returns></returns>
+        </member>
+        <member name="E:Icasye.IcasyeClient.OnMessageGot">
+            <summary>
+            an event triggered when getting TCP data from any client
+            </summary>
+        </member>
+        <member name="T:Icasye.IcasyeMsg">
+            <summary>
+            one object of this class presents one stream of TCP data
+            </summary>
+        </member>
+        <member name="F:Icasye.IcasyeMsg.Length">
+            <summary>
+            the stream data length in bytes
+            </summary>
+        </member>
+        <member name="F:Icasye.IcasyeMsg.Data">
+            <summary>
+            the stream data
+            </summary>
+        </member>
+        <member name="M:Icasye.IcasyeMsg.SetString(System.String)">
+            <summary>
+            fill Data with a string encoded using UTF8
+            </summary>
+            <param name="str"></param>
+        </member>
+        <member name="M:Icasye.IcasyeMsg.AppendString(System.String)">
+            <summary>
+            append Data with a string encoded using UTF8
+            </summary>
+            <param name="str"></param>
+        </member>
+        <member name="M:Icasye.IcasyeMsg.PrefixBytes(System.Byte[])">
+            <summary>
+            prefix bytes at the beginning
+            </summary>
+            <param name="bytes">bytes</param>
+        </member>
+        <member name="M:Icasye.IcasyeMsg.AppendBytes(System.Byte[])">
+            <summary>
+            append bytes at the end
+            </summary>
+            <param name="bytes">bytes</param>
+        </member>
+        <member name="M:Icasye.IcasyeMsg.Append(Icasye.IcasyeMsg)">
+            <summary>
+            append another IcasyeMsg
+            </summary>
+            <param name="msg">message to append</param>
+        </member>
+        <member name="M:Icasye.IcasyeMsg.Clone">
+            <summary>
+            get a clone object of this message
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Icasye.IcasyeMsg.GetString">
+            <summary>
+            decode Data using UTF8 to get the string. please only use this when you know the Data are all text and are in UTF8 encoding
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Icasye.IcasyeMsg.ToString">
+            <summary>
+            decode Data using UTF8 to get the string. please only use this when you know the Data are all text and are in UTF8 encoding
+            </summary>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

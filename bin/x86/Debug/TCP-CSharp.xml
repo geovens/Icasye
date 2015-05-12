@@ -1,0 +1,183 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TCP-CSharp</name>
+    </assembly>
+    <members>
+        <member name="T:TCP_CSharp.TCPMessage">
+            <summary>
+            one object of this class presents one stream of TCP data
+            </summary>
+        </member>
+        <member name="F:TCP_CSharp.TCPMessage.Length">
+            <summary>
+            the stream data length in bytes
+            </summary>
+        </member>
+        <member name="F:TCP_CSharp.TCPMessage.Data">
+            <summary>
+            the stream data
+            </summary>
+        </member>
+        <member name="M:TCP_CSharp.TCPMessage.SetString(System.String)">
+            <summary>
+            fill Data with a string encoded using UTF8
+            </summary>
+            <param name="str"></param>
+        </member>
+        <member name="M:TCP_CSharp.TCPMessage.AppendString(System.String)">
+            <summary>
+            append Data with a string encoded using UTF8
+            </summary>
+            <param name="str"></param>
+        </member>
+        <member name="M:TCP_CSharp.TCPMessage.PrefixBytes(System.Byte[])">
+            <summary>
+            prefix bytes at the beginning
+            </summary>
+            <param name="bytes">bytes</param>
+        </member>
+        <member name="M:TCP_CSharp.TCPMessage.AppendBytes(System.Byte[])">
+            <summary>
+            append bytes at the end
+            </summary>
+            <param name="bytes">bytes</param>
+        </member>
+        <member name="M:TCP_CSharp.TCPMessage.Append(TCP_CSharp.TCPMessage)">
+            <summary>
+            append another TCPMessage
+            </summary>
+            <param name="msg">message to append</param>
+        </member>
+        <member name="M:TCP_CSharp.TCPMessage.GetString">
+            <summary>
+            decode Data using UTF8 to get the string. please only use this when you know the Data are all text and are in UTF8 encoding
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TCP_CSharp.TCPMessage.ToString">
+            <summary>
+            decode Data using UTF8 to get the string. please only use this when you know the Data are all text and are in UTF8 encoding
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:TCP_CSharp.TCPCSharp">
+            <summary>
+            the main class to manage all TCP affairs
+            </summary>
+        </member>
+        <member name="F:TCP_CSharp.TCPCSharp.ToPrintLog">
+            <summary>
+            whether to print log
+            </summary>
+        </member>
+        <member name="F:TCP_CSharp.TCPCSharp.ToPrintError">
+            <summary>
+            whether to print error info
+            </summary>
+        </member>
+        <member name="M:TCP_CSharp.TCPCSharp.Connect(System.String,System.String,System.Int32)">
+            <summary>
+            connect to some server.
+            </summary>
+            <param name="name">user defined name of the connection</param>
+            <param name="host">address of the server</param>
+            <param name="port">port</param>
+            <returns>0=success, 10060=timeout, 10061=rejected by server, ect. see windows socket error code</returns>
+        </member>
+        <member name="M:TCP_CSharp.TCPCSharp.Disconnect(System.String)">
+            <summary>
+            disconnect a connection
+            </summary>
+            <param name="name">name of the connection to disconnect</param>
+            <returns></returns>
+        </member>
+        <member name="M:TCP_CSharp.TCPCSharp.RenameConnection(System.String,System.String)">
+            <summary>
+            raname a connection
+            </summary>
+            <param name="oldname">old name</param>
+            <param name="newname">new user defined name</param>
+            <returns></returns>
+        </member>
+        <member name="M:TCP_CSharp.TCPCSharp.GetConnectionList">
+            <summary>
+            get a list of names of currently connected connections
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TCP_CSharp.TCPCSharp.GetRemoteAddress(System.String)">
+            <summary>
+            get the remote address of a connection
+            </summary>
+            <param name="name">name of the connection to inquire</param>
+            <returns></returns>
+        </member>
+        <member name="M:TCP_CSharp.TCPCSharp.GetRemotePort(System.String)">
+            <summary>
+            get the remote port of a connection
+            </summary>
+            <param name="name">name of the connection to inquire</param>
+            <returns></returns>
+        </member>
+        <member name="M:TCP_CSharp.TCPCSharp.AddListen(System.String,System.Int32)">
+            <summary>
+            add a listener on a specified local port
+            </summary>
+            <param name="name">user defined name of the listener</param>
+            <param name="port">port to listen</param>
+            <returns>0=success, 10048=port occupied, ect. see windows socket error code</returns>
+        </member>
+        <member name="M:TCP_CSharp.TCPCSharp.StopListen(System.String)">
+            <summary>
+            stop a listener
+            </summary>
+            <param name="name">name of the listener to stop</param>
+            <returns></returns>
+        </member>
+        <member name="M:TCP_CSharp.TCPCSharp.StopListen(System.Int32)">
+            <summary>
+            stop a listener
+            </summary>
+            <param name="port">port to stop listening on</param>
+            <returns></returns>
+        </member>
+        <member name="M:TCP_CSharp.TCPCSharp.GetListenerList">
+            <summary>
+            get a list of names of current listeners
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TCP_CSharp.TCPCSharp.Send(System.String,TCP_CSharp.TCPMessage)">
+            <summary>
+            send TCP data to a connection
+            </summary>
+            <param name="destname">name of the connection to send data to</param>
+            <param name="message">data to send, in form of class TCPMessage</param>
+            <returns></returns>
+        </member>
+        <member name="M:TCP_CSharp.TCPCSharp.SetSpeMessageGotEvent(System.String,TCP_CSharp.MessageGotEvent)">
+            <summary>
+            register a new event of message got for a specified connection 
+            </summary>
+            <param name="name">name of the connection to set</param>
+            <param name="mge">the function to handle the event</param>
+            <returns></returns>
+        </member>
+        <member name="E:TCP_CSharp.TCPCSharp.OnClientGot">
+            <summary>
+            an event triggered when any current listener got a new client connection
+            </summary>
+        </member>
+        <member name="E:TCP_CSharp.TCPCSharp.OnMessageGot">
+            <summary>
+            an event  triggered when TCP data is received by any current connection
+            </summary>
+        </member>
+        <member name="E:TCP_CSharp.TCPCSharp.OnForcedDisconnect">
+            <summary>
+            an event triggered and only triggered when a connection is forcely closed BY THE OTHER SIDE, whether server or client
+            </summary>
+        </member>
+    </members>
+</doc>
