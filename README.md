@@ -4,9 +4,7 @@
 
 Icasye is a .NET library for LAN network communication. The purpose of this library is to greatly simplify the implementation of LAN network communication in .NET projects for those who know nothing about and do not want to learn TCP/IP.
 
-Here is an example of how to send a string "Hello!" from David's computer to Tom's computer.
-
-On David's computer, the following code sends the string:
+Here is an example of how to send a string "Hello!" from David's computer to Tom's computer. On David's computer, the following code sends the string:
 
     IcasyeClient IcasyeClient = new IcasyeClient();
 	IcasyeClient.SetMyName("David");
@@ -41,12 +39,15 @@ The message transmission should be successful as long as David's computer and To
 1. Copy Icasye.dll and Icasye.xml to the directory of your .NET project, and add a reference to Icasye.dll in your project.
 
 2. Include the namespace Icasye in your code
+
     using Icasye;
 
 A sample C# program named sample_Icasye showing how to use Icasye is provided.
 
 #### Side projects
 	
-Here are also a few side projects, including a library for general-purpose TCP communication, a library for general-purpose UDP communication, and tools to debug network communications. The side projects are used by Icasye, however they can also be used solo for general network communication tasks.
+Here are also a few side projects, including a library for general-purpose TCP communication, a library for general-purpose UDP communication, and tools to debug network communications. The side projects are used by Icasye, however they can also be used solo for general network communication tasks. For example, TCP-CSharp-Test is a program that can open TCP listening ports, establish and receive TCP connections, and send ascii data through connections.
+
+![screenshot](https://raw.githubusercontent.com/geovens/Icasye/master/readme_tcp_test.jpg)
 
 I use these libraries in a few of my other small but serious projects to manage network communications, and they are working very well by now.
