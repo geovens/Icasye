@@ -311,6 +311,8 @@ namespace Icasye
 				IPHostEntry ipHost = Dns.Resolve(Dns.GetHostName());
 				foreach (IPAddress myip in ipHost.AddressList)
 				{
+					if (myip.AddressFamily == AddressFamily.InterNetworkV6)
+						continue;
 					string mask = GetSubnetMask(myip);
 					byte[] ipb = IPAddress.Parse(ip).GetAddressBytes();
 					byte[] myipb = myip.GetAddressBytes();
@@ -606,6 +608,8 @@ namespace Icasye
 			UDPMessage msg = new UDPMessage();
 			foreach (IPAddress ip in ipHost.AddressList)
 			{
+				if (ip.AddressFamily == AddressFamily.InterNetworkV6)
+					continue;
 				string ipstr = ip.ToString();
 				if (ipstr == "127.0.0.1")
 					continue;
