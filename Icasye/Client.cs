@@ -129,11 +129,13 @@ namespace Icasye
 						{
 							IcasyeMsg aMsg = new IcasyeMsg();
 							aMsg.Length = j - i - prefix.Length;
-							for (int k = 0; k < aMsg.Length; k++)
-								aMsg.Data[k] = MakeUp.Data[prefix.Length + k];
+							//for (int k = 0; k < aMsg.Length; k++)
+							//	aMsg.Data[k] = MakeUp.Data[prefix.Length + k];
+							Array.Copy(MakeUp.Data, prefix.Length, aMsg.Data, 0, aMsg.Length);
 							MakeUp.Length = MakeUp.Length - j - suffix.Length;
-							for (int k = 0; k < MakeUp.Length; k++)
-								MakeUp.Data[k] = MakeUp.Data[k + j + suffix.Length];
+							//for (int k = 0; k < MakeUp.Length; k++)
+							//	MakeUp.Data[k] = MakeUp.Data[k + j + suffix.Length];
+							Array.Copy(MakeUp.Data, j + suffix.Length, MakeUp.Data, 0, MakeUp.Length);
 							return aMsg;
 						}
 					}

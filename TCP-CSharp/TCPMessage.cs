@@ -19,7 +19,7 @@ namespace TCP_CSharp
 		/// <summary>
 		/// the stream data
 		/// </summary>
-		public byte[] Data = new byte[50000];
+		public byte[] Data = new byte[500000];
 
 		/// <summary>
 		/// fill Data with a string encoded using UTF8
@@ -71,8 +71,14 @@ namespace TCP_CSharp
 		/// <param name="msg">message to append</param>
 		public void Append(TCPMessage msg)
 		{
-			for (int i = 0; i < msg.Length; i++)
-				Data[Length + i] = msg.Data[i];
+			if (Length + msg.Length >= Data.Length)
+			{
+				// ERROR
+			}
+
+			//for (int i = 0; i < msg.Length; i++)
+			//	Data[Length + i] = msg.Data[i];
+			Array.Copy(msg.Data, 0, Data, Length, msg.Length);
 			Length += msg.Length;
 		}
 
