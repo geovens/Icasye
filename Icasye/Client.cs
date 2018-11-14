@@ -99,9 +99,8 @@ namespace Icasye
 		public void SendHeartBeat()
 		{
 			TCPMessage msg = new TCPMessage();
-			msg.SetString("IcasyeWIB\0");
-			msg.AppendString("IcasyeHB");
-			msg.AppendString("\0IcasyeWIE\0");
+			msg.SetString("IcasyeHBB\0");
+			msg.AppendString("IcasyeHBE\0");
 			Owner.TM.Send(GetTMName(), msg);
 		}
 
@@ -145,10 +144,7 @@ namespace Icasye
 							MakeUp.Length = MakeUp.Length - j - suffix.Length;
 							Array.Copy(MakeUp.Data, j + suffix.Length, MakeUp.Data, 0, MakeUp.Length);
 
-							//if (aMsg.ToString() == "IcasyeHB") // heart beat
-							//	return null;
-							//else
-								return aMsg;
+							return aMsg;
 						}
 					}
 				}

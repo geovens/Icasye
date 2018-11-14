@@ -434,6 +434,12 @@ namespace Icasye
 				return;
 			}
 
+			// if it's heart beat message
+			if (message.ToString().Contains("IcasyeHBB"))
+			{
+				return;
+			}
+
 			// or normal TCP data
 			found = false;
 			foreach (Client client in Clients)
