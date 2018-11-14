@@ -139,7 +139,7 @@ namespace Icasye
 						{
 							IcasyeMsg aMsg = new IcasyeMsg();
 							aMsg.Length = j - i - prefix.Length;
-							Array.Copy(MakeUp.Data, prefix.Length, aMsg.Data, 0, aMsg.Length);
+							Array.Copy(MakeUp.Data, i + prefix.Length, aMsg.Data, 0, aMsg.Length);
 
 							MakeUp.Length = MakeUp.Length - j - suffix.Length;
 							Array.Copy(MakeUp.Data, j + suffix.Length, MakeUp.Data, 0, MakeUp.Length);

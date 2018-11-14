@@ -44,7 +44,7 @@ namespace Icasye_Test
 			for (int i = 0; i < Messages.Count; i++)
 				if (Messages[i].Text.Contains(CurrentContain))
 				{
-					messages += Messages[i].Text + "\r\n";
+					messages += StringToPlain(Messages[i].Text) + "\r\n";
 					Messages[i].TextIndex = index;
 					index++;
 				}
@@ -55,6 +55,23 @@ namespace Icasye_Test
 			return messages;
 		}
 
-
+		public string StringToPlain(string str)
+		{
+			string strout = "";
+			foreach (char c in str)
+			{
+				if (c == '\r')
+					strout += "\\r";
+				else if (c == '\n')
+					strout += "\\n";
+				else if (c == '\\')
+					strout += "\\\\";
+				else if (c >= 32 && c <= 126)
+					strout += c;
+				else
+					strout += "\\" + Convert.ToByte(c).ToString("X2");
+			}
+			return strout;
+		}
 	}
 }

@@ -7,7 +7,8 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
-using System.Runtime.InteropServices; 
+using System.Runtime.InteropServices;
+using System.Globalization;
 using TCP_CSharp;
 
 
@@ -28,6 +29,7 @@ namespace WindowsFormsApplication1
 		// the TCP data records for each connection
 		public List<string> TCPDataLog_ConnNames = new List<string>();
 		public List<string> TCPDataLog_Messages = new List<string>();
+		public bool Paused;
 
 		// status log
 		public string StatusLog;
@@ -147,8 +149,7 @@ namespace WindowsFormsApplication1
 				if (ConnectionList[i] == lbConnections.SelectedItem.ToString())
 				{
 					TCPMessage message = new TCPMessage();
-					message.SetString(tbSend.Text);
-					message.AppendString("\n");
+					message.SetString(PlainToString(tbSend.Text));
 					bool suc = TM.Send(ConnectionList[i], message);
 					if (suc)
 					{
@@ -167,7 +168,7 @@ namespace WindowsFormsApplication1
 		// happens when TCP data was got by any connection
 		public void OnMessageGot(string srcname, TCPMessage message)
 		{
-			AddTCPLog(srcname, "  R: " + message.GetString().TrimEnd('\n'));
+			AddTCPLog(srcname, "  R: " + message.GetString());
 			AddStatusLog("connection '" + srcname + "': received " + message.Length.ToString() + " bytes");
 		}
 		// only happens when the connection was closed by remote side, whether server or client
@@ -232,6 +233,8 @@ namespace WindowsFormsApplication1
 				{
 					tabTCPLog.Text = "TCP data of connection '" + selected + "'";
 					tbMessages.Text = GetTCPLog(selected);
+					tbMessages.SelectionStart = tbMessages.Text.Length;
+					tbMessages.ScrollToCaret();
 					TCPLogRefreshFlag = false;
 					TCPLogName = lbConnections.SelectedItem.ToString();
 				}
@@ -245,19 +248,22 @@ namespace WindowsFormsApplication1
 
 		private void AddTCPLog(string name, string message)
 		{
+			if (Paused)
+				return;
+
 			bool found = false; ;
 			for (int i = 0; i < TCPDataLog_ConnNames.Count; i++)
 			{
 				if (TCPDataLog_ConnNames[i] == name)
 				{
-					TCPDataLog_Messages[i] += message.TrimEnd('\n') + "\r\n";
+					TCPDataLog_Messages[i] += StringToPlain(message) + "\r\n";
 					found = true;
 				}
 			}
 			if (!found)
 			{
 				TCPDataLog_ConnNames.Add(name);
-				TCPDataLog_Messages.Add(message.TrimEnd('\n') + "\r\n");
+				TCPDataLog_Messages.Add(StringToPlain(message) + "\r\n");
 			}
 			TCPLogRefreshFlag = true;
 		}
@@ -295,6 +301,9 @@ namespace WindowsFormsApplication1
 		}
 		private void AddStatusLog(string message)
 		{
+			if (Paused)
+				return;
+
 			StatusLog += message + "\r\n";
 			StatusLogRefreshFlag = true;
 		}
@@ -309,5 +318,91 @@ namespace WindowsFormsApplication1
 			tbConnectPort.Text = TM.GetRemotePort(connname).ToString();
 		}
 
+		public string StringToPlain(string str)
+		{
+			string strout = "";
+			foreach (char c in str)
+			{
+				if (c == '\r')
+					strout += "\\r";
+				else if (c == '\n')
+					strout += "\\n";
+				else if (c == '\\')
+					strout += "\\\\";
+				else if (c >= 32 && c <= 126)
+					strout += c;
+				else
+					strout += "\\" + Convert.ToByte(c).ToString("X2");
+			}
+			return strout;
+		}
+
+		public string PlainToString(string str)
+		{
+			string strout = "";
+			for (int i = 0; i < str.Length; i++)
+			{
+				if (str[i] == '\\')
+				{
+					if (i == str.Length - 1)
+						break;
+					if (str[i + 1] == 'r')
+					{
+						strout += '\r';
+						i++;
+					}
+					else if (str[i + 1] == 'n')
+					{
+						strout += '\n';
+						i++;
+					}
+					else if (str[i + 1] == '\\')
+					{
+						strout += '\\';
+						i++;
+					}
+					else
+					{
+						if (i == str.Length - 2)
+							break;
+						int outnum;
+						if (int.TryParse(str.Substring(i + 1, 2), NumberStyles.HexNumber, CultureInfo.InvariantCulture, out outnum))
+						{
+							strout += (char)outnum;
+							i += 2;
+						}
+						else
+						{
+							strout += '\\';
+						}
+					}
+				}
+				else
+					strout += str[i];
+			}
+			return strout;
+		}
+
+		private void btPause_Click(object sender, EventArgs e)
+		{
+			Paused = !Paused;
+			if (Paused)
+				btPause.Text = "Unpause";
+			else
+				btPause.Text = "Pause";
+		}
+
+		private void btClear_Click(object sender, EventArgs e)
+		{
+			if (lbConnections.SelectedIndex == -1)
+				return;
+			for (int i = 0; i < ConnectionList.Count; i++)
+			{
+				if (ConnectionList[i] == lbConnections.SelectedItem.ToString())
+				{
+					ClearTCPLog(ConnectionList[i]);
+				}
+			}
+		}
 	}
 }
