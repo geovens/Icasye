@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Icasye", "Icasye\Icasye.csproj", "{C8AEA7FB-84CA-4E27-AFC9-275199C46C3E}"
 EndProject
@@ -10,12 +10,21 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UDP-CSharp", "UDP-CSharp\UDP-CSharp.csproj", "{3681682B-823B-4A02-A7F1-B0215A7E21A7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Icasye-Test", "Icasye-Test\Icasye-Test.csproj", "{E1DB77E1-5877-4627-A0D5-FF2F58B6CF1D}"
+	ProjectSection(ProjectDependencies) = postProject
+		{3681682B-823B-4A02-A7F1-B0215A7E21A7} = {3681682B-823B-4A02-A7F1-B0215A7E21A7}
+		{F918B675-6914-4B73-B020-FC4FF0A844C7} = {F918B675-6914-4B73-B020-FC4FF0A844C7}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TCP-CSharp-Test", "TCP-CSharp-Test\TCP-CSharp-Test.csproj", "{87EBEB0D-D0D8-40DB-85AD-BB3C00E93E34}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UDP-CSharp-Test", "UDP-CSharp-Test\UDP-CSharp-Test.csproj", "{F7571218-53F0-4E55-A84C-03DE2B52B340}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sample_Icasye", "sample_Icasye\sample_Icasye.csproj", "{152D85E7-03DA-4A75-938E-52825085B960}"
+	ProjectSection(ProjectDependencies) = postProject
+		{3681682B-823B-4A02-A7F1-B0215A7E21A7} = {3681682B-823B-4A02-A7F1-B0215A7E21A7}
+		{F918B675-6914-4B73-B020-FC4FF0A844C7} = {F918B675-6914-4B73-B020-FC4FF0A844C7}
+		{C8AEA7FB-84CA-4E27-AFC9-275199C46C3E} = {C8AEA7FB-84CA-4E27-AFC9-275199C46C3E}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

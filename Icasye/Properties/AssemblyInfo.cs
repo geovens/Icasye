@@ -11,7 +11,7 @@ using System.Resources;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("")]
-[assembly: AssemblyCopyright("© 2015 Nai Weizhi")]
+[assembly: AssemblyCopyright("© 2018 Nai Weizhi")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -33,6 +33,6 @@ using System.Resources;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("0.1.15.0")]
-[assembly: AssemblyFileVersion("0.1.15.0")]
+[assembly: AssemblyVersion("0.1.17.0")]
+[assembly: AssemblyFileVersion("0.1.17.0")]
 [assembly: NeutralResourcesLanguageAttribute("en")]
