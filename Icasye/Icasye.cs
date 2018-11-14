@@ -16,7 +16,7 @@ namespace Icasye
 	public class IcasyeClient
 	{
 		internal Mnge Mnge;
-		internal bool ToPrintLog = true;
+		internal bool ToPrintLog = false;
 		public bool ToPrintError = true;
 
 		/// <summary>
