@@ -30,6 +30,10 @@ namespace TCP_CSharp
 		{
 			return SocketsMnge.Disconnect(name);
 		}
+		public bool SetTimeout(string name, int ms)
+		{
+			return SocketsMnge.SetTimeout(name, ms);
+		}
 		public bool RenameConnection(string oldname, string newname)
 		{
 			return SocketsMnge.RenameConn(oldname, newname);

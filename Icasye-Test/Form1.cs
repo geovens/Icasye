@@ -21,6 +21,7 @@ namespace Icasye_Test
 		private void Form1_Load(object sender, EventArgs e)
 		{
 			IcasyeClient.OnMessageGot += OnMessageGot;
+            IcasyeClient.SetToPrintLog();
 		}
 		private void Form1_FormClosing(object sender, FormClosingEventArgs e)
 		{

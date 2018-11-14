@@ -56,6 +56,7 @@ namespace Icasye
 			int suc = Owner.TM.Connect(GetTMName(), Address, Port);
 			if (suc == 0)
 			{
+				Owner.TM.SetTimeout(GetTMName(), 20000);
 				Owner.Owner.PrintLog("Icasye.Client.Connect: connect " + GetTMName() + " successful");
 				Connected = true;
 			}
@@ -89,8 +90,18 @@ namespace Icasye
 		{
 			Owner.Owner.PrintLog("Icasye.Client.SendWelcome: send welcome to " + Name + " replyid=" + WaitReplyID.ToString());
 			TCPMessage msg = new TCPMessage();
-			msg.SetString("IcasyeWIB\0" + Owner.MyName + "\0" + Owner.MyDataPort + "\0");
-			msg.AppendString(WaitReplyID.ToString() + "\0" + "IcasyeWIE\0");
+			msg.SetString("IcasyeWIB\0");
+			msg.AppendString(Owner.MyName + "\0" + Owner.MyDataPort + "\0" + WaitReplyID.ToString());
+			msg.AppendString("\0IcasyeWIE\0");
+			Owner.TM.Send(GetTMName(), msg);
+		}
+
+		public void SendHeartBeat()
+		{
+			TCPMessage msg = new TCPMessage();
+			msg.SetString("IcasyeWIB\0");
+			msg.AppendString("IcasyeHB");
+			msg.AppendString("\0IcasyeWIE\0");
 			Owner.TM.Send(GetTMName(), msg);
 		}
 
@@ -129,14 +140,15 @@ namespace Icasye
 						{
 							IcasyeMsg aMsg = new IcasyeMsg();
 							aMsg.Length = j - i - prefix.Length;
-							//for (int k = 0; k < aMsg.Length; k++)
-							//	aMsg.Data[k] = MakeUp.Data[prefix.Length + k];
 							Array.Copy(MakeUp.Data, prefix.Length, aMsg.Data, 0, aMsg.Length);
+
 							MakeUp.Length = MakeUp.Length - j - suffix.Length;
-							//for (int k = 0; k < MakeUp.Length; k++)
-							//	MakeUp.Data[k] = MakeUp.Data[k + j + suffix.Length];
 							Array.Copy(MakeUp.Data, j + suffix.Length, MakeUp.Data, 0, MakeUp.Length);
-							return aMsg;
+
+							//if (aMsg.ToString() == "IcasyeHB") // heart beat
+							//	return null;
+							//else
+								return aMsg;
 						}
 					}
 				}

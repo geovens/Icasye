@@ -70,6 +70,18 @@ namespace TCP_CSharp
 			return Mnge.Disconnect(name);
 		}
 		/// <summary>
+		/// set timeout
+		/// </summary>
+		/// <param name="name">name of the connection</param>
+		/// <param name="ms">timeout in ms</param>
+		/// <returns></returns>
+		public bool SetTimeout(string name, int ms)
+		{
+			if (name == null || name == "")
+				return false;
+			return Mnge.SetTimeout(name, ms);
+		}
+		/// <summary>
 		/// raname a connection
 		/// </summary>
 		/// <param name="oldname">old name</param>

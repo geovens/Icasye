@@ -564,6 +564,7 @@ namespace Icasye
 			int tick = 0;
 			while (IcasyeStatus == 1)
 			{
+				// try to connect ?
 				TMConnections = TM.GetConnectionList();
 				for (int i = 0; i < Clients.Count; i++)
 				{
@@ -579,11 +580,27 @@ namespace Icasye
 						}
 					}
 				}
+
 				tick++;
 				if (tick >= 50)
 					tick = 0;
+
+				// send card periodically
 				if (tick == 0 && Owner.ToSendCard)
 					SendCard(0);
+
+				// send TCP heart beat message periodically. 2018.11.14
+				if (tick % 10 == 0)
+				{
+					for (int i = 0; i < Clients.Count; i++)
+					{
+						if (!Clients[i].Connecting && Clients[i].Connected)
+						{
+							Clients[i].SendHeartBeat();
+						}
+					}
+				}
+
 				Thread.Sleep(100);
 			}
 

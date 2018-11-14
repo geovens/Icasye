@@ -98,6 +98,17 @@ namespace TCP_CSharp
 			else
 				return false;
 		}
+		public bool SetTimeout(string name, int ms)
+		{
+			int ind = GetTCPSocketIndex(name);
+			if (ind >= 0)
+			{			
+				TCPSockets[ind].SetTimeout(ms);
+				return true;
+			}
+			else
+				return false;
+		}
 		public bool AttachConn(string name, TcpClient client)
 		{
 			int found = GetTCPSocketIndex(name);
