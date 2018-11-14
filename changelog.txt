@@ -1,0 +1,4 @@
+
+v0.1.17 (Nov. 14, 2018)
+=================
+- Send a heart beat per 1s for all Icasye connections, and set 20s timeout for TCP connections, to fix unresponsive connection not closed.
