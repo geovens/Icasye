@@ -54,7 +54,6 @@ namespace TCP_CSharp
 			int length;
 			while (Connected)
 			{
-                Owner.Owner.Owner.PrintLog("here");
 				try
 				{
 					length = ns.Read(bytes, 0, bytes.Length);
