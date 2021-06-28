@@ -243,15 +243,23 @@ namespace Icasye
 						return false;
 				}
 			}
-			Client aclient = new Client(this);
+
+			bool suc = false;
 			Random rd = new Random();
-			aclient.Name = "null" + rd.Next(500).ToString();
-			aclient.Address = address;
-			aclient.Port = 5301;
-			aclient.IsIcasyeClient = true;
-			aclient.IsManullyAdded = true;
-			aclient.Init = true;
-			bool suc = RegistNewClient(aclient);
+			string rdname = rd.Next(30000).ToString();
+			for (int port = 5301; port <= 5305; port++)
+			{
+				Client aclient = new Client(this);
+
+				aclient.Name = "manual-" + rdname + "-" + port.ToString();
+				aclient.Address = address;
+				aclient.Port = port;
+				aclient.IsIcasyeClient = true;
+				aclient.IsManullyAdded = true;
+				aclient.Init = true;
+				suc = suc || RegistNewClient(aclient);
+			}
+
 			return suc;
 		}
 		public void BlockClient(string name)
