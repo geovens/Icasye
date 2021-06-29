@@ -257,7 +257,8 @@ namespace Icasye
 				aclient.IsIcasyeClient = true;
 				aclient.IsManullyAdded = true;
 				aclient.Init = true;
-				suc = suc || RegistNewClient(aclient);
+				bool suc0 = RegistNewClient(aclient);
+				suc = suc || suc0;
 			}
 
 			return suc;
