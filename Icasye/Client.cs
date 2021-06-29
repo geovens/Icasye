@@ -142,6 +142,9 @@ namespace Icasye
 							Array.Copy(MakeUp.Data, i + prefix.Length, aMsg.Data, 0, aMsg.Length);
 
 							MakeUp.Length = MakeUp.Length - j - suffix.Length;
+							//2021.06.29 ???
+							if (MakeUp.Length < 0)
+								MakeUp.Length = 0;
 							Array.Copy(MakeUp.Data, j + suffix.Length, MakeUp.Data, 0, MakeUp.Length);
 
 							return aMsg;
