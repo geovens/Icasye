@@ -82,10 +82,6 @@ namespace Icasye
 				WaitReplyID = rd.Next(500) + 1;
 				Thread.Sleep(100);
 				SendWelcome();
-				SendWelcome();
-				SendWelcome();
-				SendWelcome();
-				SendWelcome();
 			}
 			Connecting = false;
 		}

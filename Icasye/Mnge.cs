@@ -448,10 +448,6 @@ namespace Icasye
 					{
 						theclient.WaitReplyID = reportreplyid + 1000;
 						theclient.SendWelcome();
-						theclient.SendWelcome();
-						theclient.SendWelcome();
-						theclient.SendWelcome();
-						theclient.SendWelcome();
 					}
 				}
 				else
@@ -634,13 +630,15 @@ namespace Icasye
 					SendCard(0);
 
 				// send TCP heart beat message periodically. 2018.11.14
+				// 2021.06.30 changed heart beat to welcome which contains name
 				if (tick % 10 == 0)
 				{
 					for (int i = 0; i < Clients.Count; i++)
 					{
 						if (!Clients[i].Connecting && Clients[i].Connected)
 						{
-							Clients[i].SendHeartBeat();
+							//Clients[i].SendHeartBeat();
+							Clients[i].SendWelcome();
 						}
 					}
 				}
