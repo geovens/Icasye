@@ -448,6 +448,10 @@ namespace Icasye
 					{
 						theclient.WaitReplyID = reportreplyid + 1000;
 						theclient.SendWelcome();
+						theclient.SendWelcome();
+						theclient.SendWelcome();
+						theclient.SendWelcome();
+						theclient.SendWelcome();
 					}
 				}
 				else
