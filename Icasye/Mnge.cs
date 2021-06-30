@@ -143,10 +143,10 @@ namespace Icasye
 		public List<string> GetClientList()
 		{
 			List<string> names = new List<string>();
-			foreach (Client client in Clients)
+			for (int i = 0; i < Clients.Count; i++)
 			{
-				if (client.Connected && !client.Blocked)
-					names.Add(client.Name);
+				if (Clients[i].Connected && !Clients[i].Blocked)
+					names.Add(Clients[i].Name);
 			}
 			return names;
 		}
@@ -193,8 +193,13 @@ namespace Icasye
 		}
 		public bool AddGeneralConnection(string name, string address, int port)
 		{
-			foreach (Client client in Clients)
+			List<string> clientnames = GetClientList();
+			foreach (string clientname in clientnames)
 			{
+				Client client = GetClient(clientname);
+				if (client == null)
+					continue;
+
 				// not allowed to manually add a connection with a name same with onother client, whether current or outdated one
 				//if (client.Name == name && !(client.Address == address && client.Port == port))
 				if (client.Name == name || (client.Address == address && client.Port == port))
@@ -230,8 +235,13 @@ namespace Icasye
 		}
 		public bool AddIcasyeClientManually(string address)
 		{
-			foreach (Client client in Clients)
+			List<string> clientnames = GetClientList();
+			foreach (string clientname in clientnames)
 			{
+				Client client = GetClient(clientname);
+				if (client == null)
+					continue;
+
 				if (client.Address == address)
 				{
 					//if (client.Blocked)
@@ -378,8 +388,13 @@ namespace Icasye
 					if (reportreplyid >= 1001)
 					{
 						Owner.PrintLog("Icasye.Mnge.OnMessageGot: got a reply");
-						foreach (Client client in Clients)
+						List<string> clientnames2 = GetClientList();
+						foreach (string clientname in clientnames2)
 						{
+							Client client = GetClient(clientname);
+							if (client == null)
+								continue;
+
 							if (client.WaitReplyID == reportreplyid - 1000)
 							{
 								Owner.PrintLog("Icasye.Mnge.OnMessageGot: renew client depending on the reply");
@@ -451,8 +466,13 @@ namespace Icasye
 
 			// or normal TCP data
 			found = false;
-			foreach (Client client in Clients)
+			List<string> clientnames = GetClientList();
+			foreach (string clientname in clientnames)
 			{
+				Client client = GetClient(clientname);
+				if (client == null)
+					continue;
+
 				if (client.GetTMName() == srcname && !client.Blocked)
 				{
 					// canceled in 0.1.12
@@ -502,8 +522,13 @@ namespace Icasye
 		protected void OnForcedDisconnect(string srcname)
 		{
 			Owner.PrintLog("Icasye.Mnge.OnForcedDisconnect: OnForcedDisconnect event happens");
-			foreach (Client client in Clients)
+			List<string> clientnames = GetClientList();
+			foreach (string clientname in clientnames)
 			{
+				Client client = GetClient(clientname);
+				if (client == null)
+					continue;
+
 				if (client.GetTMName() == srcname)
 				{
 					Owner.PrintLog("Icasye.Mnge.OnForcedDisconnect: removing a connection in table");
@@ -660,9 +685,9 @@ namespace Icasye
 		// helper
 		protected Client GetClient(string name)
 		{
-			foreach (Client client in Clients)
-				if (client.Name == name)
-					return client;
+			for (int i = 0; i < Clients.Count; i++)
+				if (Clients[i].Name == name)
+					return Clients[i];
 			return null;
 		}
 		protected int GetClientIndex(string name)
