@@ -12,6 +12,7 @@ namespace UDP_CSharp_Test
 	public partial class Form1 : Form
 	{
 		UDPCSharp UM = new UDPCSharp();
+		string LastReceivedMessage;
 
 		public Form1()
 		{
@@ -25,29 +26,43 @@ namespace UDP_CSharp_Test
 
 		private void button1_Click(object sender, EventArgs e)
 		{
-			UM.AddListen("abc1", 5001);
-			UM.AddListen("abc", 5002);
+			tbListenPort.Enabled = false;
+			btListenStart.Enabled = false;
 
+			int ret = UM.AddListen("abc1", int.Parse(tbListenPort.Text));
+			if (ret == 0)
+				lbStatus.Text = "Start listen successful.";
+			else
+				lbStatus.Text = "Start listen failed.";
 			UM.SetSpeMessageGotEvent("abc1", OnFavorite);
-
-			//UM.AddHost("h1", "127.0.0.1", 5001);
-			//UM.AddHost("h2", "127.0.0.1", 500);
-			//UM.AddHost("h2", "127.0.0.1", 5002);
-
-			UM.RenameListener("abc", "abc2");
 		}
 
 		private void button2_Click(object sender, EventArgs e)
 		{
+			tbDestIP.Enabled = false;
+			tbDestPort.Enabled = false;
+
+			UM.AddDestination("dest", tbDestIP.Text, int.Parse(tbDestPort.Text));
+
 			UDPMessage msg = new UDPMessage();
-			msg.SetString("hello");
-			UM.Send("h1", msg);
-			UM.Send("h2", msg);
+			msg.SetString(tbDestMsg.Text);
+			UM.Send("dest", msg);
+			
+			/*
+			UDPMessage msg2 = new UDPMessage();
+			msg2.Data[0] = (byte)'d';
+			msg2.Data[1] = (byte)'a';
+			msg2.Data[2] = (byte)'t';
+			msg2.Data[3] = (byte)'a';
+			msg2.Length = 4;
+			UM.Send("dest", msg2);
+			*/
 		}
 
 		private void OnMessageGot(string srcname, UDPMessage msg)
 		{
-			Console.WriteLine(srcname + " got " + msg.Length.ToString() + " bytes");
+			Console.WriteLine(srcname + " got " + msg.Length.ToString() + " bytes: " + msg.GetString());
+			LastReceivedMessage = msg.GetString();
 		}
 		private void OnFavorite(string srcname, UDPMessage msg)
 		{
@@ -57,7 +72,11 @@ namespace UDP_CSharp_Test
 		private void Form1_FormClosing(object sender, FormClosingEventArgs e)
 		{
 			UM.StopListen("abc1");
-			UM.StopListen("abc2");
+		}
+
+		private void timer1_Tick(object sender, EventArgs e)
+		{
+			lbListenReceived.Text = LastReceivedMessage;
 		}
 	}
 }
